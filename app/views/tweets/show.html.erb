@@ -1,0 +1,11 @@
+
+<p>
+  <strong>Tweet:</strong>
+  <%= @tweet.text %>
+  <%= link_to 'Edit', edit_tweet_path(@tweet) %>
+</p>
+<%= render 'repplies' %>
+
+<%= render 'repplies/form' %>
+
+<%= link_to 'Back', tweets_path %>

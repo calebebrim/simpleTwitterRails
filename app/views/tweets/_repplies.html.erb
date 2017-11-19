@@ -1,0 +1,9 @@
+
+<strong>Repplies</strong>
+<table>
+    <td><strong>Author:</strong></td>
+    <td><strong>Repply:</strong></td>
+    <% @tweet.repplies.each do |repply| %>
+        <%= render repply%>
+    <% end %>
+</table>

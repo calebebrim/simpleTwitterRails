@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Twitter</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div id="container">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      <% end %>
+      <%= yield %>
+    </div>
+    <div id="user_header">
+      <% if logged_in? %>
+        User: <%= @current_user.name %>
+        |
+        Following: <%= @current_user.following.count %>
+        Followed By: <%= @current_user.followers.count %>
+
+        <div style="float:right">
+          Options:
+          <%= link_to 'Logout', logout_path %>
+          <%= link_to 'Back', tweets_path %>
+        </div>
+      <% else %>
+        <%= link_to "Sign Up", signup_path %>
+        <%= link_to "Log In", login_path %>       
+      <% end %>
+      <hr>
+    </div>
+      <table>
+        <tr>
+          <td>
+            <%#= debug @current_user %>
+
+            <h2>Who to follow</h2>
+            <table>
+              <% @users.each do |user| %>
+                  
+                  <tr>
+                    <td><%= user.email %></td>
+                    <td>
+                      
+                        <% if @current_user.following?(user) %>
+                            <%= render 'unfollow', user: user %>
+                        <% else %>
+                            <%= render 'follow', user: user %>
+                        <% end %>
+                      
+                    </td>
+                  <tr>
+              <% end %>
+            </table>
+          </td>
+        <tr>
+      </table>
+      
+      
+  </body>
+</html>
+
+
+
+
+
+

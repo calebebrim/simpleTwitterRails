@@ -1,0 +1,14 @@
+<strong>Repply:</strong>
+<%= form_with(model: [ @tweet, @tweet.repplies.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :Author %>
+    <%= form.text_field :owner %>
+  </p>
+  <p>
+    <%= form.label :text %>
+    <%= form.text_area :text %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

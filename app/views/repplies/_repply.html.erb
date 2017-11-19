@@ -1,0 +1,7 @@
+<tr>
+    <td><%= repply.owner %></td>
+    <td><%= repply.text %></td>
+    <td><%= link_to 'Delete', [repply.tweet, repply],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %></td>
+</tr>
