@@ -20,24 +20,7 @@
     z-index: 9999;
     top: 0;">
       <% if logged_in? %>
-        <% unless @user %>
-          User: <%= @current_user.name %>
-          |
-          Following: <%= @current_user.following.count %>
-          Followed: <%= @current_user.followers.count %>
-        <% else %>
-          <div style="display:block;float:left;margin-right:50px">
-            User: <%= @user.name %>
-            |
-            Following: <%= @user.following.count %>
-            Followed: <%= @user.followers.count %>
-          </div>
-          <% if @current_user.following?(@user) %>
-            <%= render 'unfollow', user: @user %>
-          <% else %>
-           <%= render 'follow', user: @user %>
-          <% end %>
-        <% end %>
+        -------Twitter------- 
 
 
         <div style="float:right;margin-right:30px">
@@ -53,14 +36,41 @@
       <hr style="width:100%">
     </div>
     
-
-    <table style="width:100%;margin-top:50px">
+    <div style="display:block;float:left;width:25%;height:300px;background:white;">
+      <% if @user %>
+        <style>
+          .tweet_profile_header > div{
+            padding:10px;
+            padding-top:5px;
+          }
+        </style>
+        <div class="tweet_profile_header">
+          <div>User: <%= @user.name %></div>
+          <div>Following: <%= @user.following.count %></div>
+          <div>Followed: <%= @user.followers.count %></div>
+          <div>Tweets: <%= @user.tweets.count %></div>
+          <% if @current_user.following?(@user) %>
+              <%= render 'unfollow', user: @user %>
+            <% else %>
+              <%= render 'follow', user: @user %>
+          <% end %>
+        </div>
+      <% else %>
+        <div>User: <%= @current_user.name %></div>
+        <div>Email: <%= @current_user.email %></div>
+        <div>Following: <%= @current_user.following.count %></div>
+        <div>Followed: <%= @current_user.followers.count %></div>
+        <div>Tweets: <%= @current_user.tweets.count %></div>
+      <% end %>
+      
+    </div>
+    <table style="display:block;width:100%;margin-top:50px;padding-left:25%;padding-right:25%">
      
 
       <% @tweets.each do |tweet| %>
         <tr>
             <td>
-              <div style="background:LightGray;height:50px;paddin-top:5px">
+              <div style="height:50px;padding-top:5px">
                 <%= tweet.text %>
                 <small style="float:right;position:relative;top:35px">
                   <font size="1">
@@ -75,8 +85,10 @@
                     <% end %>
                     
                   </font>
-                <small>
+                </small>
+                
               </div>
+            <hr>
             </td>
             
             <td></td>
