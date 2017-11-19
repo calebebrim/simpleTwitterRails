@@ -5,20 +5,19 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version : ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-darwin16]
 
-* System dependencies
+* Rails version: Rails 5.1.4
 
-* Configuration
+* System dependencies: none
 
-* Database creation
+* Database creation: rails run: db:migrate
 
-* Database initialization
+* Database initialization rails run: db:seed
 
-* How to run the test suite
+* Deployment instructions: run: rails s
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+Login info(after run rails db:seed): 
+email: "example@rails.org",
+password:"foobar",

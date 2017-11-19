@@ -7,7 +7,13 @@ class UsersController < ApplicationController
     end
     
     def show
-        @users = User.where("id NOT IN (:user_id)", user_id: @current_user.id,)
+        if params[:id]
+            @user = User.find(params[:id])
+            @tweets = @user.tweets
+            render template: "tweets/index"    
+        else
+            @users = User.where("id NOT IN (:user_id)", user_id: @current_user.id,)            
+        end
     end
     
 
