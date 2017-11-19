@@ -1,6 +1,10 @@
 class TweetsController < ApplicationController
-    before_action :require_login
+    before_action :before_change , only: [:edit, :update, :destroy]
+      
     
+    
+
+
     def index
         # @tweets = @current_user.tweets
         @users = User.all
@@ -19,7 +23,11 @@ class TweetsController < ApplicationController
     end
 
     def edit
+
         @tweet = Tweet.find(params[:id])
+        # if @tweet.user != @current_user
+        #     redirect_to action: "index"
+        # end
     end
     
     def create
@@ -57,5 +65,12 @@ class TweetsController < ApplicationController
     private 
     def tweet_params 
         params.require(:tweet).permit(:text)
+    end
+
+    def before_change
+        @tweet = Tweet.find(params[:id])
+        if @tweet.user != @current_user
+            redirect_to action: "index"
+        end
     end
 end
