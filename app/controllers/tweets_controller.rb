@@ -9,9 +9,12 @@ class TweetsController < ApplicationController
         # @tweets = @current_user.tweets
         @users = User.all
         @following = @current_user.following
+        unless params[:page]
+            params[:page] = 0
+        end 
         @tweets = Tweet.where("user_id IN (:following_ids) OR user_id = :user_id", 
                                     following_ids: @current_user.following_ids, user_id: @current_user.id)
-                                    .order("created_at DESC")
+                                        .order("created_at DESC")
     end
 
     def show

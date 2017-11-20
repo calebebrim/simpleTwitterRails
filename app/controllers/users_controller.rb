@@ -9,7 +9,10 @@ class UsersController < ApplicationController
     def show
         if params[:id]
             @user = User.find(params[:id])
-            @tweets = @user.tweets
+            unless params[:page]
+                params[:page] = 0
+            end 
+            @tweets = @user.tweets.paginate(:order =>"created_at ASC" ,:page => params[:page], :per_page => 14)
             render template: "tweets/index"    
         else
             @users = User.where("id NOT IN (:user_id)", user_id: @current_user.id,)            
